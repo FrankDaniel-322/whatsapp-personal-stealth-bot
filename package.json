@@ -1,0 +1,22 @@
+{
+  "name": "whatsapp-personal-stealth-bot",
+  "version": "1.0.0",
+  "description": "Bot personal de WhatsApp con comandos privados y reenvio silencioso de mensajes view-once.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "check": "node --check src/index.js && node --check src/config.js && node --check src/core/bot.js && node --check src/core/connection.js && node --check src/core/health.js && node --check src/core/messages.js && node --check src/commands/openOnce.js && node --check src/utils/identity.js && node --check src/utils/logger.js && node --check src/utils/media.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "^6.7.18",
+    "dotenv": "^16.4.7",
+    "node-cache": "^5.1.2",
+    "pino": "^9.6.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
