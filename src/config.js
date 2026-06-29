@@ -26,6 +26,7 @@ export function loadConfig() {
 
   const prefix = process.env.COMMAND_PREFIX || ':'
   const command = process.env.OPEN_ONCE_COMMAND || 'o'
+  const openOnceAliases = readList('OPEN_ONCE_ALIASES')
 
   return {
     ownerName: process.env.OWNER_NAME || 'Owner',
@@ -34,6 +35,8 @@ export function loadConfig() {
     ownerChatJid: process.env.OWNER_CHAT_JID || `${ownerNumber}@s.whatsapp.net`,
     prefix,
     openOnceCommand: command.toLowerCase(),
+    openOnceAliases: (openOnceAliases.length ? openOnceAliases : ['q riko', 'wao', 'waoo'])
+      .map((item) => item.toLowerCase()),
     sessionDir: path.resolve(process.env.SESSION_DIR || 'auth_session'),
     logLevel: process.env.LOG_LEVEL || 'info',
     sendOwnerStatus: readBoolean('SEND_OWNER_STATUS', true),

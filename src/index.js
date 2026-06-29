@@ -1,11 +1,14 @@
 import 'dotenv/config'
+import './utils/noisyLogs.js'
 import { loadConfig } from './config.js'
 import { startBot } from './core/bot.js'
 import { startHealthServer } from './core/health.js'
+import { registerRuntime } from './utils/runtime.js'
 import { logger } from './utils/logger.js'
 
 const config = loadConfig()
 
+registerRuntime()
 startHealthServer(config)
 
 startBot(config).catch((error) => {
