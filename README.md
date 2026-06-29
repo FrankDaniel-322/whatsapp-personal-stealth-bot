@@ -56,12 +56,14 @@ Con doble clic:
 
 - `start-bot.cmd`: prende el bot.
 - `stop-bot.cmd`: apaga el bot usando `runtime/bot.pid`.
+- `relink-bot.cmd`: mueve la sesion vieja a backup para pedir un codigo completamente nuevo.
 
 Con comandos:
 
 ```bash
 npm start
 npm run stop
+npm run relink
 ```
 
 Si quieres cerrarlo desde la misma ventana donde esta corriendo, tambien sirve `Ctrl + C`.
@@ -71,6 +73,27 @@ Si quieres cerrarlo desde la misma ventana donde esta corriendo, tambien sirve `
 `Bad MAC` suele aparecer cuando Baileys intenta descifrar mensajes viejos o sesiones que WhatsApp no le entrego completas. No significa que el bot este mal si luego ves `WhatsApp connection open` y los comandos funcionan.
 
 Esta version filtra esos mensajes ruidosos de consola para que solo veas eventos utiles.
+
+## Vincular con codigo, sin QR
+
+Baileys pide que el numero se envie solo con digitos y codigo de pais, sin `+`, espacios, parentesis ni guiones. Ejemplo Peru:
+
+```env
+OWNER_NUMBER=519XXXXXXXX
+```
+
+Si WhatsApp dice `No se pudo vincular el dispositivo`, haz esto:
+
+1. Apaga el bot con `stop-bot.cmd`.
+2. Ejecuta `relink-bot.cmd`.
+3. Ejecuta `start-bot.cmd`.
+4. Copia el codigo nuevo apenas aparezca; caduca rapido.
+5. En tu WhatsApp principal entra a `Dispositivos vinculados`.
+6. Toca `Vincular dispositivo`.
+7. Elige la opcion de vincular con numero/codigo, no el QR.
+8. Escribe el codigo exactamente como aparece.
+
+No reutilices codigos antiguos. Cada intento fallido debe usar un codigo nuevo.
 
 ## Uso bajo demanda, sin tarjeta
 

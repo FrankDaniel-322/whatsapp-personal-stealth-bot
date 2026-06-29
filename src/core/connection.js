@@ -3,25 +3,12 @@ import { Boom } from '@hapi/boom'
 import qrcode from 'qrcode-terminal'
 import { logger } from '../utils/logger.js'
 
-let pairingCodeShown = false
-
 export async function handleConnectionUpdate(update, sock, config, restart) {
   const { connection, lastDisconnect, qr } = update
 
   if (!sock.authState.creds.registered && qr) {
     logger.info('New QR generated')
     qrcode.generate(qr, { small: true })
-
-    if (config.pairingCode && !pairingCodeShown) {
-      try {
-        const code = await sock.requestPairingCode(config.ownerNumber)
-        const formatted = code.match(/.{1,4}/g)?.join('-') || code
-        logger.info(`Pairing code: ${formatted}`)
-        pairingCodeShown = true
-      } catch (error) {
-        logger.warn('Pairing code could not be generated', error)
-      }
-    }
   }
 
   if (connection === 'open') {

@@ -17,6 +17,11 @@ function readList(name) {
     .filter(Boolean)
 }
 
+function readNumber(name, fallback) {
+  const value = Number(process.env[name])
+  return Number.isFinite(value) && value >= 0 ? value : fallback
+}
+
 export function loadConfig() {
   const ownerNumber = cleanNumber(process.env.OWNER_NUMBER)
 
@@ -41,6 +46,7 @@ export function loadConfig() {
     logLevel: process.env.LOG_LEVEL || 'info',
     sendOwnerStatus: readBoolean('SEND_OWNER_STATUS', true),
     pairingCode: readBoolean('PAIRING_CODE', true),
+    pairingCodeDelayMs: readNumber('PAIRING_CODE_DELAY_MS', 2500),
     healthServer: {
       enabled: readBoolean('ENABLE_HEALTH_SERVER', false),
       port: Number(process.env.PORT || 3000)

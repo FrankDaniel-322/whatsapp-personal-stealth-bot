@@ -14,6 +14,7 @@ Esta es la opcion mas simple si no quieres tarjeta, pagos ni 24/7.
 3. Vincula WhatsApp una vez con QR o codigo.
 4. Para prender: doble clic en `start-bot.cmd`.
 5. Para apagar: doble clic en `stop-bot.cmd`.
+6. Para forzar una vinculacion nueva: doble clic en `relink-bot.cmd` y luego `start-bot.cmd`.
 
 Ventajas:
 
@@ -62,3 +63,23 @@ Importante: si eliminas el codespace, tambien puedes perder `auth_session/` y te
 Si ves mensajes como `Failed to decrypt message with any known session` o `Bad MAC`, normalmente significa que WhatsApp entrego mensajes que esa sesion local no puede descifrar. No es grave si el bot conecta y los comandos funcionan.
 
 La version actual filtra esos logs para que no llenen la consola.
+
+## Si el codigo de vinculacion falla
+
+El numero debe estar en formato internacional solo con digitos:
+
+```env
+OWNER_NUMBER=519XXXXXXXX
+```
+
+Sin `+`, espacios, guiones ni parentesis.
+
+Pasos recomendados:
+
+1. Ejecuta `stop-bot.cmd`.
+2. Ejecuta `relink-bot.cmd`.
+3. Ejecuta `start-bot.cmd`.
+4. Usa el codigo nuevo de inmediato.
+5. En WhatsApp: `Dispositivos vinculados > Vincular dispositivo > Vincular con numero/codigo`.
+
+Si ya habia una sesion rota, `relink-bot.cmd` no la borra definitivamente: la mueve a una carpeta backup con fecha.
